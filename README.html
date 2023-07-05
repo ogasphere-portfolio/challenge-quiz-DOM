@@ -1,0 +1,119 @@
+<h1 id="quiz">Quiz</h1>
+<p>On va monter un petit jeu de quiz en Javascript 😍</p>
+<h2 id="code-fourni">Code fourni</h2>
+<ul>
+<li><code>index.html</code> le fichier HTML contenant le Quiz qui inclut :<ul>
+<li><code>css/style.css</code> le fichier des styles CSS à agrémenter au besoin</li>
+<li><code>js/questions.js</code> le fichier contenant toutes les questions (et leur réponse) de notre Quiz</li>
+<li><code>js/app.js</code> le fichier principal de notre code Javascript</li></ul></li>
+</ul>
+<h2 id="challenge">Challenge</h2>
+<p>Au cours des étapes, seulement si vous êtes bloqués, vous pouvez regarder ce qui est écrit dans <em>Aide / Guide</em> 👀  <br />
+Sinon, faites avec les connaissances acquises et n'oubliez pas, votre première idée est très souvent la bonne 💪</p>
+<h3 id="etape-1---première-question">Etape 1 - Première question</h3>
+<p>Avec les notions apprises, au lancement de la page, poser la première question du fichier <code>js/questions.js</code>.</p>
+<p><details><summary>Aide / Indices</summary></p>
+<ul>
+<li>le premier index n'est pas <code>1</code>, mais  <code>0</code> 😉</li>
+<li>la variable <code>questions</code> créée dans ce fichier est disponible dans tout le code JavaScript</li>
+<li>on va donc utiliser cette variable pour accéder à la première question du tableau</li>
+</ul>
+<p></details></p>
+<h3 id="etape-2---récupérer-la-réponse-de-lutilisateur">Etape 2 - Récupérer la réponse de l'utilisateur</h3>
+<p>Au moment de poser la question, dans le code, récupérer la réponse de l'utilisateur et l'afficher dans la console.</p>
+<p><details><summary>Aide / Indices</summary></p>
+<ul>
+<li>https://developer.mozilla.org/fr/docs/Web/API/Window/prompt</li>
+<li>la réponse de l'utilisateur est retournée par la fonction <code>prompt</code> 😉</li>
+</ul>
+<p></details></p>
+<h3 id="etape-3---vérifier-la-réponse">Etape 3 - Vérifier la réponse</h3>
+<p>En se basant sur les données du fichier <code>js/questions.js</code>, vérifier que la réponse est bien celle attendue.  <br />
+Si c'est la bonne réponse, afficher "CORRECT" dans la console, "faux" sinon.</p>
+<p><details><summary>Aide / Indices</summary></p>
+<ul>
+<li>récupérer la réponse attendue pour la question posée</li>
+<li>la variable <code>responses</code> créée dans <code>js/questions.js</code> est disponible dans tout le code JavaScript</li>
+<li>les index/clés de ce tableau sont les mêmes que pour le tableau <code>questions</code></li>
+<li>autrement dit, la réponse à question ayant l'index/clé 2, se trouve dans le tableau <code>responses</code>, à l'index/clé 2</li>
+<li>comparer la réponse attendue avec la réponse effectuée</li>
+<li>si la réponse est correcte</li>
+<li>afficher dans la console "CORRECT"</li>
+<li>sinon</li>
+<li>afficher dans la console "faux"</li>
+</ul>
+<p></details></p>
+<h3 id="etape-4---modifier-le-dom">Etape 4 - Modifier le DOM</h3>
+<p>Si la réponse est correcte, ajouter <strong>la question</strong> correspondante dans la liste verte, sinon, dans la liste rouge</p>
+<p><details><summary>Aide / Indices</summary></p>
+<ul>
+<li>analyse bien le code HTML fourni</li>
+<li>un <code>id</code> permet de faciliter le ciblage de la liste verte ou rouge</li>
+</ul>
+<p></details></p>
+<h3 id="etape-5---on-crée-des-fonctions-nerd_face">Etape 5 - On crée des fonctions 🤓</h3>
+<p>On va mieux structurer notre code.  <br />
+Mais une fonction n'est pas suffisante. En effet, une fonction doit avoir un but simple, précis et "atomique" (le plus petit possible). Cela signifie qu'il vaut mieux 3 fonctions qu'une seule qui fait tout. Chaque fonction pouvant alors être réutilisée dans un autre contexte.</p>
+<p>Bien entendu, le but de nos fonctions ne sera pas, par exemple, de <em>Poser la première question</em>. Ce sera plutôt de <em>Poser la question dont l'index est fourni en paramètre</em>. Le but doit être plus "générique" pour être utilisable et réutilisable.  </p>
+<p><details><summary>Aide / Indices</summary></p>
+<p>Voici le code qui utiliserait ces 3 fameuses fonctions :</p>
+<pre><code class="hljs js language-js"><span class="hljs-comment">// Pose la premère question et récupère la réponse de l&#x27;utilisateur</span>
+<span class="hljs-keyword">let</span> response = <span class="hljs-title function_">askQuestion</span>(<span class="hljs-number">0</span>);
+
+<span class="hljs-comment">// Vérifie que la réponse donnée est bien la bonne</span>
+<span class="hljs-keyword">let</span> isCorrect = <span class="hljs-title function_">checkResponse</span>(<span class="hljs-number">0</span>, response);
+
+<span class="hljs-comment">// Modifie le DOM (#right ou #wrong si c&#x27;est une bonne ou mauvaise réponse)</span>
+<span class="hljs-title function_">addResponseToDom</span>(<span class="hljs-number">0</span>, isCorrect);
+</code></pre>
+<p></details></p>
+<h3 id="etape-6---on-boucle--muscle">Etape 6 - On boucle ! 💪</h3>
+<p>Maintenant qu'on a réussi un "cycle complet" du jeu pour une question, tout en utilisant des fonctions, on peut passer à l'étape suivante : <strong>poser toutes les questions</strong> du tableau.</p>
+<p>Et comme on aime structurer correctement notre code, le jeu (la boucle) va être placée dans une fonction 🎉</p>
+<p><details><summary>Rappel: parcourir un tableau en JS</summary></p>
+<pre><code class="hljs js language-js"><span class="hljs-comment">// Un tableau contenant 3 éléments</span>
+<span class="hljs-keyword">let</span> monTableau = [
+    <span class="hljs-string">&#x27;Riri&#x27;</span>,
+    <span class="hljs-string">&#x27;Fifi&#x27;</span>,
+    <span class="hljs-string">&#x27;Loulou&#x27;</span>,
+];
+<span class="hljs-comment">// #1 - Boucle &quot;for&quot; permettant de parcourir ce tableau 1 à 1</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> index=<span class="hljs-number">0</span>; index &lt; monTableau.<span class="hljs-property">length</span>; index++) {
+    <span class="hljs-comment">// Je récupère la valeur pour l&#x27;élément &quot;courant&quot; dans une variable</span>
+    <span class="hljs-keyword">let</span> currentValue = monTableau[index];
+
+    <span class="hljs-comment">// J&#x27;affiche la valeur dans la console</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;index=&#x27;</span>+ index +<span class="hljs-string">&#x27; &amp; valeur=&#x27;</span>+currentValue);
+}
+<span class="hljs-comment">// #2 - Boucle &quot;for in&quot; permettant de parcourir ce tableau 1 à 1</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> index <span class="hljs-keyword">in</span> monTableau) {
+    <span class="hljs-comment">// Je récupère la valeur pour l&#x27;élément &quot;courant&quot; dans une variable</span>
+    <span class="hljs-keyword">let</span> currentValue = monTableau[index];
+
+    <span class="hljs-comment">// J&#x27;affiche la valeur dans la console</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;index=&#x27;</span>+ index +<span class="hljs-string">&#x27; &amp; valeur=&#x27;</span>+currentValue);
+}
+</code></pre>
+<p></details></p>
+<p><details><summary>Aide / Indices</summary></p>
+<ul>
+<li>on ne va plus se contenter de la première question !</li>
+<li>créer une fonction <code>playQuiz()</code></li>
+<li>cette fonction boucle sur le tableau de questions</li>
+<li>puis pour chaque question :<ul>
+<li>on demande une réponse à l'internaute et on la récupère</li>
+<li>on vérifie si la réponse est correcte</li>
+<li>on ajoute la question dans la liste verte ou rouge si ok ou ko</li></ul></li>
+</ul>
+<p></details></p>
+<h2 id="bonus-rainbow">Bonus 🌈</h2>
+<ul>
+<li>on compte les bonnes réponses et les mauvaises réponses</li>
+<li>on affiche le nombre de bonnes et mauvaises réponses à la fin des balises <code>&lt;h2&gt;</code></li>
+<li>on ajoute d'autres questions 🤓</li>
+</ul>
+<h2 id="bonus-boom">Bonus 💥</h2>
+<ul>
+<li>on utilise désormais <code>createElement</code> pour créer un élément : https://developer.mozilla.org/fr/docs/Web/API/Document/createElement</li>
+<li>puis on ajoute cet élément dans le DOM avec <code>append</code> : https://developer.mozilla.org/fr/docs/orphaned/Web/API/ParentNode/append</li>
+</ul>
